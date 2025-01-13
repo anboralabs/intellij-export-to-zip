@@ -1,0 +1,24 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+    <id>co.anbora.labs.intellij-export-to-zip</id>
+    <name>Project to Zip</name>
+    <vendor email="support@anbora.co" url="https://labs.anbora.co">Anbora-labs</vendor>
+
+    <!-- Product and plugin compatibility requirements.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
+    <depends>com.intellij.modules.platform</depends>
+
+    <!-- Extension points defined by the plugin.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
+    <extensions defaultExtensionNs="com.intellij">
+        <notificationGroup id="Export_To_Zip_Action_Notification" displayType="STICKY_BALLOON"/>
+    </extensions>
+    <actions>
+        <action id="co.anbora.labs.export.project.zip.ExportProjectToZip"
+                class="co.anbora.labs.export.project.zip.ExportProjectToZip"
+                text="Export Project to Zip File...">
+            <override-text place="MainMenu" text="Project to Zip File..."/>
+            <add-to-group group-id="FileExportGroup" anchor="last"/>
+        </action>
+    </actions>
+</idea-plugin>
