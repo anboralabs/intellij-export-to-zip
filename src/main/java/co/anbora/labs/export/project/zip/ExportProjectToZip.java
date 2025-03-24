@@ -104,7 +104,7 @@ public class ExportProjectToZip extends AnAction implements DumbAware {
 
         BiPredicate<String, Path> filter = getFilter(indicator, excludes, allRoots);
 
-        try (Compressor zip = new Compressor.Zip(zipFile)) {
+        try (Compressor zip = new Compressor.Zip(zipFile.toPath())) {
             zip.filter(filter);
 
             File[] children = commonRoot.listFiles();
@@ -112,10 +112,10 @@ public class ExportProjectToZip extends AnAction implements DumbAware {
                 for (File child : children) {
                     String childRelativePath = (FileUtil.filesEqual(commonRoot, basePath) ? commonRoot.getName() + '/' : "") + child.getName();
                     if (child.isDirectory()) {
-                        zip.addDirectory(childRelativePath, child);
+                        zip.addDirectory(childRelativePath, child.toPath());
                     }
                     else {
-                        zip.addFile(childRelativePath, child);
+                        zip.addFile(childRelativePath, child.toPath());
                     }
                 }
             }
